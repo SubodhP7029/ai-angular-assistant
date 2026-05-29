@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Hub — Subodh Patil</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="brand">
+        <h1>Job Application Hub</h1>
+        <p>Subodh Raghunath Patil · Senior Frontend Engineer</p>
+      </div>
+      <div class="top-actions">
+        <button type="button" id="btnAnalyzeAll" class="btn primary">Analyze all</button>
+        <button type="button" id="btnGenerateAllPdfs" class="btn secondary">
+          Generate all PDFs
+        </button>
+        <button type="button" id="btnExportMarkdown" class="btn ghost">Export Markdown</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel input-panel">
+        <section class="card">
+          <h2>Paste job descriptions</h2>
+          <p class="hint">
+            Separate multiple JDs with a line containing only <code>---</code> or
+            <code>=====</code>. One JD per block works best.
+          </p>
+          <textarea
+            id="jdBulkInput"
+            rows="14"
+            placeholder="Paste one or more job descriptions here...
+
+Example separator between two JDs:
+---
+"
+          ></textarea>
+          <div class="row">
+            <label class="checkbox">
+              <input type="checkbox" id="autoSplit" checked />
+              Auto-split on --- or =====
+            </label>
+          </div>
+          <button type="button" id="btnSplitPreview" class="btn ghost full">
+            Preview split ({<span id="splitCount">0</span>} jobs)
+          </button>
+        </section>
+
+        <section class="card compact">
+          <h3>Server (for PDFs)</h3>
+          <p class="hint">
+            Run from project root:<br />
+            <code>npm run job-hub</code>
+          </p>
+          <p id="serverStatus" class="status offline">Checking server…</p>
+        </section>
+
+        <section class="card compact">
+          <h3>Quick actions</h3>
+          <button type="button" id="btnCopyCursorTemplate" class="btn ghost full">
+            Copy Cursor prompt template
+          </button>
+          <button type="button" id="btnLoadSample" class="btn ghost full">Load sample JD</button>
+        </section>
+      </aside>
+
+      <section class="panel results-panel">
+        <div id="emptyState" class="empty-state">
+          <p>Paste job descriptions on the left, then click <strong>Analyze all</strong>.</p>
+        </div>
+        <div id="resultsContainer" class="results-container hidden"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>PDFs save to <code>output/</code></span>
+      <span id="toast" class="toast hidden" role="status"></span>
+    </footer>
+
+    <script src="resume-data.js"></script>
+    <script src="analyzer.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
